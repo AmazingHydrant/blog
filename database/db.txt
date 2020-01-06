@@ -1,0 +1,53 @@
+#後台用戶表 data_user
+名稱		長度	形態		空值	預設值	備註			額外資訊
+user_id		10	int		N	Null	用戶主鍵		主鍵
+user_name	50	varchar		N	""	用戶名			唯一
+user_pass	255	varchar		N	""	密碼
+
+#前台用戶表 data_homeuser	
+名稱		長度	形態		空值	預設值	備註			額外資訊
+user_id		10	int		N	Null	用戶主鍵		主鍵
+user_name	50	varchar		N	""	用戶名			唯一
+user_pass	255	varchar		N	""	密碼
+email		255	varchar		N	""	電子郵件		
+token		255	varchar		N	""	驗證用戶有效性	
+active		1	tinyint		N	0	是否啟用1啟用0未啟用
+CREATE TABLE `blog`.`data_homeuser` ( `user_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '前台用戶主鍵' , `user_name` VARCHAR(255) NOT NULL COMMENT '前台用戶名' , `user_pass` VARCHAR(255) NOT NULL COMMENT '前台用戶密碼' , `email` VARCHAR(255) NOT NULL COMMENT '前台用戶email' , `token` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '驗證用戶有效性' , `active` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '是否啟用1啟用0未啟用' , PRIMARY KEY (`user_id`), UNIQUE (`user_name`)) ENGINE = InnoDB COMMENT = '前台用戶表'; 
+
+#文章分類表 blog_category
+名稱		長度	形態		空值	預設值	備註			額外資訊
+cate_id		10	int		N	Null	分類表主鍵		主鍵
+cate_name	50	varchar		N	""	分類名稱		唯一
+cate_title	50	varchar		N	""	分類類別
+cate_order	10	int		N	0	排序
+cate_pid	10	int		N	0	父id
+
+#文章表	blog_article
+名稱		長度	形態		空值	預設值	備註			額外資訊
+art_id		10	int		N	Null	文章主鍵		主鍵
+art_title	50	varchar		N	""	文章標題		唯一
+art_tag		50	varchar		N	""	文章標籤
+art_desc	255	varchar		N	""	文章描述
+art_thumb	255	varchar		N	""	文章縮圖
+art_content		text		N	""	文章內容
+art_time	11	int		N	0	文章發佈時間
+art_editor	50	varchar		N	""	文章作者
+art_view	10	int		N	0	文章瀏覽次數
+cate_id		10	int		N	0	文章分類id
+art_status	10	int		N	0	推薦次數
+art_love	10	int		N	0	文章按讚數
+art_collect	10	int		N	0	文章收藏數
+
+#文章點讚記錄表	blog_client_ip
+名稱		長度	形態		空值	預設值	備註			額外資訊
+id		10	int		N	Null	文章點讚表主鍵		主鍵
+art_id		10	int		N	0	點讚文章id
+ip		255	varchar		N	""	ip
+
+#文章收藏表 blog_collect
+名稱		長度	形態		空值	預設值	備註			額外資訊
+id		10	int		N	Null	文章收藏表主鍵		主鍵
+art_id		10	int		N	0	收藏文章id
+uid		10	int		N	0	收藏用戶id
+
+#
