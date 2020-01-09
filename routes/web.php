@@ -43,7 +43,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('dologin', 'LoginController@dologin');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'isLogin'], function () {
+//無權限頁面
+Route::get('noAccess', 'Admin\PermissionController@noAccess');
+//權限重寫入session
+Route::get('rePerm', 'Admin\PermissionController@rePerm');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['isLogin']], function () {
+    //登出後臺
+    Route::get('logout', 'LoginController@logout');
+});
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['hasPerm', 'isLogin']], function () {
     //後臺首頁
     Route::get('index', 'LoginController@index');
     //後臺歡迎頁面
@@ -51,9 +60,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'isLo
     //統計頁面
     Route::get('welcome1', 'LoginController@welcome1');
     //登出後臺
-    Route::get('logout', 'LoginController@logout');
-    //後臺用戶相關
     Route::resource('user', 'UserController');
     //用戶批量刪除
     Route::post('user/del', 'UserController@delAll');
+    //角色相關
+    Route::resource('role', 'RoleController');
+    //角色權限頁面
+    Route::get('role/auth/{id}', 'RoleController@auth');
+    //執行角色權限修改
+    Route::post('role/doauth', 'RoleController@doauth');
+    //權限相關
+    Route::resource('permission', 'PermissionController');
 });

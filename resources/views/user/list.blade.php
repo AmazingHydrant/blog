@@ -23,7 +23,7 @@
             <td>{{ $v->user_id }}</td>
             <td>{{ $v->user_name }}</td>
             <td>{{ $v->user_pass }}</td>
-            <td><a href="/user/edit/{{$v->user_id}}">修改</a> <a href="javascript:;" onclick="del_user(this, '{{$v}}' )">刪除</a></td>
+            <td><a href="/user/edit/{{$v->user_id}}">修改</a> <a href="javascript:;" onclick="del_user(this, {{$v}} )">刪除</a></td>
         </tr>
         @endforeach
     </table>

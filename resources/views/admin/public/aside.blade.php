@@ -7,57 +7,56 @@
                     <cite>會員管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
-                    <li>
+                    <!-- <li>
                         <a onclick="xadmin.add_tab('統計頁面','/admin/welcome1')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>統計頁面</cite></a>
-                    </li>
+                    </li> -->
                     <li>
                         <a onclick="xadmin.add_tab('會員列表','/admin/user')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>會員列表</cite></a>
                     </li>
-
                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>會員管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('新增會員','/admin/user/create',true)">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>新增會員</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('會員删除','member-del.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>會員删除</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('等级管理','member-list1.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>等级管理</cite></a>
-                            </li>
-                        </ul>
+                        <a onclick="xadmin.add_tab('新增會員','/admin/user/create',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>新增會員</cite></a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
-                    <cite>订单管理</cite>
+                    <i class="iconfont left-nav-li" lay-tips="群組管理">&#xe723;</i>
+                    <cite>群組管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                        <a onclick="xadmin.add_tab('群組列表','/admin/role')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite></a>
+                            <cite>群組列表</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
+                        <a onclick="xadmin.add_tab('新增群組','/admin/role/create',true)">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表1</cite></a>
+                            <cite>新增群組</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="權限管理">&#xe723;</i>
+                    <cite>權限管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('權限管理','/admin/permission')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>權限列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('新增權限','/admin/permission/create',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>新增權限</cite></a>
                     </li>
                 </ul>
             </li>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>新增用戶</title>
+    <title>新增會員</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -18,7 +18,7 @@
             <form class="layui-form">
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>用戶名</label>
+                        <span class="x-red">*</span>會員名</label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_username" name="user_name" required="" lay-verify="username" autocomplete="off" class="layui-input"></div>
                 </div>
@@ -60,7 +60,7 @@
                 form.verify({
                     username: function(value) {
                         if (value.length < 4) {
-                            return '用戶名至少得4個字';
+                            return '會員名至少得4個字';
                         }
                     },
                     pass: [/(.+){4,16}$/, '密碼必须4到16位'],
@@ -89,9 +89,9 @@
                                     layer.alert(data.message, {
                                             icon: 6
                                         },
-                                        function() {
+                                        function(i) {
                                             //关闭当前frame
-                                            xadmin.close();
+                                            layer.close(i);
                                             // 可以对父窗口进行刷新 
                                             xadmin.father_reload();
                                         });
@@ -99,9 +99,9 @@
                                     layer.alert(data.message, {
                                             icon: 5
                                         },
-                                        function() {
+                                        function(i) {
                                             //关闭当前frame
-                                            xadmin.close();
+                                            layer.close(i);
                                             // 可以对父窗口进行刷新 
                                             xadmin.father_reload();
                                         });
@@ -113,16 +113,16 @@
                                 layer.alert("增加失敗", {
                                         icon: 5
                                     },
-                                    function() {
+                                    function(i) {
                                         //关闭当前frame
-                                        xadmin.close();
+                                        layer.close(i);
 
                                         // 可以对父窗口进行刷新 
                                         xadmin.father_reload();
                                     });
                             }
                         });
-                        console.log(data);
+                        // console.log(data);
                         return false;
                     });
 

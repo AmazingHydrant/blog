@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -24,10 +26,12 @@ class LoginController extends Controller
      */
     public function dologin(Request $request)
     {
+
+
         $this->validate($request, [
             'username' => 'required|between:4,50|alpha_dash',
             'password' => 'required|between:4,255',
-            'captcha' => 'required|captcha',
+            // 'captcha' => 'required|captcha',
         ], [
             'username.required' => '請輸入用戶名',
             'username.between' => '用戶名長度要求在 4-50 之間',
@@ -36,17 +40,26 @@ class LoginController extends Controller
         //上面驗證失敗，會導到原POST網址，拋出錯誤訊息 用$errors->all()接受
         //且代碼不會往下執行
 
-        $db = DB::table('data_user');
+        $db = DB::table('users');
         $user_info = $db->where('user_name', $request['username'])->first();
         if (!$user_info) {
             return redirect('admin/login')->with('errors', '用戶名錯誤');
         }
-        if ($user_info->user_pass != md5($request['password'])) {
+        if (Crypt::decrypt($user_info->user_pass) != ($request['password'])) {
             return redirect('admin/login')->with('errors', '密碼錯誤');
         }
         //驗證成功繼續
-
         session()->put('user', $user_info);
+        $user = User::find($user_info->user_id);
+        $perm_url = [];
+        foreach ($user->role as $r) {
+            $perm = $r->permission;
+            foreach ($perm as $p) {
+                $perm_url[] = 'App\\Http\\Controllers\\' . $p->perm_url;
+            }
+        }
+        $perm_url = array_unique($perm_url);
+        session()->put('perm_url', $perm_url);
         return  redirect('admin/index');
     }
 

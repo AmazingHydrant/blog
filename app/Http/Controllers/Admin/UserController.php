@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Role;
 use App\Model\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -93,7 +94,12 @@ class UserController extends Controller
     {
         //尋找用戶INFO
         $user = User::find($id);
-        return view('admin.user.edit', compact('user'));
+        $roles = Role::get();
+        $own_roles = [];
+        foreach ($user->role as $v) {
+            $own_roles[] = $v->id;
+        }
+        return view('admin.user.edit', compact('user', 'roles', 'own_roles'));
     }
 
     /**
@@ -110,7 +116,14 @@ class UserController extends Controller
         $user->user_name = $request->input('user_name');
         $user->email = $request->input('email');
         $res = $user->save();
-        if ($res) {
+        DB::table('user_role')->where('user_id', $id)->delete();
+        $res1 = true;
+        if (!empty($request->input('role_id'))) {
+            foreach ($request->input('role_id') as $value) {
+                $res1 = DB::table('user_role')->insert(['user_id' => $id, 'role_id' => $value]);
+            }
+        }
+        if ($res and $res1) {
             $data = [
                 'status' => 1,
                 'message' => '修改成功',

@@ -17,4 +17,9 @@ class User extends Model
     protected $fillable = [
         'user_name', 'user_pass', 'email',
     ];
+
+    public function role()
+    {
+        return $this->belongsToMany('App\Model\Role', 'user_role', 'user_id', 'role_id');
+    }
 }
