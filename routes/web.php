@@ -71,4 +71,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['has
     Route::post('role/doauth', 'RoleController@doauth');
     //權限相關
     Route::resource('permission', 'PermissionController');
+    //文章相關
+    Route::resource('cate', 'CateController');
 });
